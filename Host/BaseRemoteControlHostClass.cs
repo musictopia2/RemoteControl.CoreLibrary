@@ -1,4 +1,4 @@
-﻿namespace RemoteControls.CoreLibrary.Host;
+﻿namespace RemoteControl.CoreLibrary.Host;
 public abstract class BaseRemoteControlHostClass : IAsyncDisposable
 {
     protected string Title { get; }

@@ -1,4 +1,6 @@
-﻿namespace RemoteControls.CoreLibrary.Client;
+﻿using RemoteControl.CoreLibrary.Helpers;
+
+namespace RemoteControl.CoreLibrary.Client;
 public abstract class BaseRemoteControlClientClass : IAsyncDisposable
 {
     protected string Title { get; }

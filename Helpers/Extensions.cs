@@ -1,4 +1,4 @@
-﻿namespace RemoteControls.CoreLibrary.Helpers;
+﻿namespace RemoteControl.CoreLibrary.Helpers;
 public static class Extensions
 {
     public static HubConnection RegisterGenericMethod<T>(this HubConnection hub, string method, Action<T> action)
