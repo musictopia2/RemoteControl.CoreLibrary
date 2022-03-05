@@ -32,7 +32,7 @@ public abstract class BaseRemoteControlHostClass : IAsyncDisposable
     public Func<Task>? NewClient { get; set; }
     protected virtual Task HostingAsync() { return Task.CompletedTask; }
     protected virtual void RegisterCustomMethods() { } //defaults with nothing.  but can register any other custom method that is needed.
-    protected async Task SendCustomDataAsync(string method, object value)
+    protected async Task SendCustomDataAsync<T>(string method, T value)
     {
         string data = await js.SerializeObjectAsync(value);
         await Hub!.SendAsync("HostSendClientDataAsync", Title, method, data);
@@ -41,7 +41,9 @@ public abstract class BaseRemoteControlHostClass : IAsyncDisposable
     {
         await Hub!.SendAsync("HostInitAsync", Title);
     }
+#pragma warning disable CA1816 // Dispose methods should call SuppressFinalize
     public ValueTask DisposeAsync()
+#pragma warning restore CA1816 // Dispose methods should call SuppressFinalize
     {
         return Hub.DisposeAsync();
     }
