@@ -53,6 +53,10 @@ public abstract class BaseRemoteControlClientClass : IAsyncDisposable
     {
         await Hub!.SendAsync("ClientInvokeSimpleActionAsync", Title, method);
     }
+    protected async Task SendStringActionAsync(string method, string args)
+    {
+        await Hub!.SendAsync("ClientInvokeComplexActionAsync", Title, method, args);
+    }
     protected async Task SendComplexActionAsync(string method, object payLoad)
     {
         string data = await js.SerializeObjectAsync(payLoad);
