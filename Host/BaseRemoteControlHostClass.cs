@@ -34,7 +34,7 @@ public abstract class BaseRemoteControlHostClass : IAsyncDisposable
     protected virtual void RegisterCustomMethods() { } //defaults with nothing.  but can register any other custom method that is needed.
     protected async Task SendCustomDataAsync<T>(string method, T value)
     {
-        string data = await js.SerializeObjectAsync(value);
+        string data = await js1.SerializeObjectAsync(value);
         await Hub!.SendAsync("HostSendClientDataAsync", Title, method, data);
     }
     private async Task RegisterAsync()

@@ -1,6 +1,4 @@
-﻿using RemoteControl.CoreLibrary.Helpers;
-
-namespace RemoteControl.CoreLibrary.Client;
+﻿namespace RemoteControl.CoreLibrary.Client;
 public abstract class BaseRemoteControlClientClass : IAsyncDisposable
 {
     protected string Title { get; }
@@ -17,7 +15,9 @@ public abstract class BaseRemoteControlClientClass : IAsyncDisposable
     {
         await Hub.StartAsync();
     }
+#pragma warning disable CA1816 // Dispose methods should call SuppressFinalize
     public async ValueTask DisposeAsync()
+#pragma warning restore CA1816 // Dispose methods should call SuppressFinalize
     {
         await Hub!.DisposeAsync();
     }
@@ -59,7 +59,7 @@ public abstract class BaseRemoteControlClientClass : IAsyncDisposable
     }
     protected async Task SendComplexActionAsync(string method, object payLoad)
     {
-        string data = await js.SerializeObjectAsync(payLoad);
+        string data = await js1.SerializeObjectAsync(payLoad);
         await Hub!.SendAsync("ClientInvokeComplexActionAsync", Title, method, data);
     }
 }

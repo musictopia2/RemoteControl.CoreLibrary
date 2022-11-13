@@ -5,7 +5,7 @@ public static class Extensions
     {
         hub.On<string>(method, async item =>
         {
-            T value = await js.DeserializeObjectAsync<T>(item);
+            T value = await js1.DeserializeObjectAsync<T>(item);
             action.Invoke(value);
         });
         return hub;
