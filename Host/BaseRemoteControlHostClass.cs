@@ -49,17 +49,17 @@ public abstract class BaseRemoteControlHostClass : IAsyncDisposable
 
             //if you can't send it, ignore (if possible).
         }
-        
-       
+
+
     }
     private async Task RegisterAsync()
     {
         await Hub!.SendAsync("HostInitAsync", Title);
     }
-#pragma warning disable CA1816 // Dispose methods should call SuppressFinalize
-    public ValueTask DisposeAsync()
-#pragma warning restore CA1816 // Dispose methods should call SuppressFinalize
+    public async ValueTask DisposeAsync()
     {
-        return Hub.DisposeAsync();
+        await Hub!.SendAsync("HostDisconnectAsync", Title); //this way even tablets can act as host.
+        await Hub.DisposeAsync();
+        GC.SuppressFinalize(this); // Fix for CA1816
     }
 }
