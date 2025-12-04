@@ -1,13 +1,16 @@
 ﻿namespace RemoteControl.CoreLibrary.Helpers;
 public static class Extensions
 {
-    public static HubConnection RegisterGenericMethod<T>(this HubConnection hub, string method, Action<T> action)
+    extension( HubConnection hub)
     {
-        hub.On<string>(method, async item =>
+        public HubConnection RegisterGenericMethod<T>(string method, Action<T> action)
         {
-            T value = await js1.DeserializeObjectAsync<T>(item);
-            action.Invoke(value);
-        });
-        return hub;
-    }
+            hub.On<string>(method, async item =>
+            {
+                T value = await js1.DeserializeObjectAsync<T>(item);
+                action.Invoke(value);
+            });
+            return hub;
+        }
+    }   
 }
